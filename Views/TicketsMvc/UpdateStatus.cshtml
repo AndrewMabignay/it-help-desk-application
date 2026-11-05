@@ -1,0 +1,86 @@
+﻿@model ITHelpDeskApplication.ViewModels.UpdateTicketStatusViewModel
+
+@{
+    ViewData["Title"] = "Update Ticket Status";
+}
+
+<div class="container-fluid">
+
+    <div class="mb-4">
+        <h2>Update Ticket Status</h2>
+        <p class="text-muted">
+            Change the current status of a support ticket.
+        </p>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+
+            <div class="mb-4">
+                <p>
+                    <strong>Ticket ID:</strong> #@Model.TicketId
+                </p>
+
+                <p>
+                    <strong>Subject:</strong> @Model.Subject
+                </p>
+            </div>
+
+            <hr />
+
+            <form asp-controller="TicketsMvc"
+                  asp-action="UpdateStatus"
+                  asp-route-id="@Model.TicketId"
+                  method="post">
+
+                <input type="hidden" asp-for="TicketId" />
+                <input type="hidden" asp-for="Subject" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3"></div>
+
+                <div class="mb-4">
+
+                    <label asp-for="Status"
+                           class="form-label">
+                        Ticket Status
+                    </label>
+
+                    <select asp-for="Status"
+                            class="form-select">
+
+                        <option value="">Select Status</option>
+
+                        @foreach (var status in ViewBag.StatusList)
+                        {
+                            <option value="@status">@status</option>
+                        }
+
+                    </select>
+
+                    <span asp-validation-for="Status"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Update Status
+                    </button>
+
+                    <a asp-controller="TicketsMvc"
+                       asp-action="Index"
+                       class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>

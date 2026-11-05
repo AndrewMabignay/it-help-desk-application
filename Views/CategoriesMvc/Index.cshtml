@@ -1,0 +1,112 @@
+﻿@model List<ITHelpDeskApplication.ViewModels.CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">Category Management</h2>
+            <p class="text-muted">
+                Manage ticket categories.
+            </p>
+        </div>
+
+        <button class="btn btn-primary" disabled>
+            + Add Category
+        </button>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Categories</h6>
+                    <h3 class="fw-bold">@Model.Count</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">Active Categories</h6>
+                    <h3 class="fw-bold text-success">
+                        @Model.Count(c => c.Status == "Active")
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">Inactive Categories</h6>
+                    <h3 class="fw-bold text-danger">
+                        @Model.Count(c => c.Status == "Inactive")
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Categories Table -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3">All Categories</h5>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+
+                    <thead>
+                        <tr>
+                            <th>Category ID</th>
+                            <th>Category Name</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var category in Model)
+                        {
+                            <tr>
+                                <td>@category.Id</td>
+
+                                <td class="fw-semibold">
+                                    @category.Name
+                                </td>
+
+                                <td>@category.Description</td>
+
+                                <td>
+                                    @if (category.Status == "Active")
+                                    {
+                                        <span class="badge bg-success">
+                                            Active
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">
+                                            Inactive
+                                        </span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

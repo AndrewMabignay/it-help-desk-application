@@ -1,0 +1,97 @@
+﻿@model ITHelpDeskApplication.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid">
+
+    <div class="mb-4">
+        <h2 class="fw-bold">Dashboard</h2>
+        <p class="text-muted">Welcome to the IT Help Desk Management System.</p>
+    </div>
+
+    <!-- Dashboard Cards -->
+
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Tickets</h6>
+                    <h2 class="fw-bold">@Model.TotalTickets</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Open Tickets</h6>
+                    <h2 class="fw-bold text-danger">@Model.OpenTickets</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">In Progress</h6>
+                    <h2 class="fw-bold text-warning">@Model.InProgressTickets</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Resolved Tickets</h6>
+                    <h2 class="fw-bold text-success">@Model.ResolvedTickets</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Tickets -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3">Recent Tickets</h5>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+
+                    <thead>
+                        <tr>
+                            <th>Ticket Number</th>
+                            <th>Title</th>
+                            <th>Requested By</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var ticket in Model.RecentTickets)
+                        {
+                            <tr>
+                                <td>@ticket.TicketNumber</td>
+                                <td>@ticket.Title</td>
+                                <td>@ticket.RequestedBy</td>
+                                <td>@ticket.Priority</td>
+                                <td>
+                                    <span class="badge bg-secondary">
+                                        @ticket.Status
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

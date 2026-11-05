@@ -1,0 +1,160 @@
+﻿@model ITHelpDeskApplication.ViewModels.ReportsViewModel
+
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<div class="container-fluid">
+    <div class="mb-4">
+        <h2>Reports & Analytics</h2>
+        <p class="text-muted">Overview of help desk ticket statistics.</p>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <p class="text-muted mb-1">Total Tickets</p>
+                    <h3>@Model.TotalTickets</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <p class="text-muted mb-1">Open Tickets</p>
+                    <h3 class="text-danger">@Model.OpenTickets</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <p class="text-muted mb-1">In Progress</p>
+                    <h3 class="text-warning">@Model.InProgressTickets</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <p class="text-muted mb-1">Resolved Tickets</p>
+                    <h3 class="text-success">@Model.ResolvedTickets</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Tickets by Status -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="mb-4">Tickets by Status</h5>
+
+                    @foreach (var item in Model.StatusReports)
+                    {
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>@item.Name</span>
+                                <span>@item.Count (@item.Percentage%)</span>
+                            </div>
+
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar"
+                                     role="progressbar"
+                                     style="width: @item.Percentage%">
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Tickets by Priority -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="mb-4">Tickets by Priority</h5>
+
+                    @foreach (var item in Model.PriorityReports)
+                    {
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>@item.Name</span>
+                                <span>@item.Count (@item.Percentage%)</span>
+                            </div>
+
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-info"
+                                     role="progressbar"
+                                     style="width: @item.Percentage%">
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Tickets by Category -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="mb-4">Tickets by Category</h5>
+
+                    @foreach (var item in Model.CategoryReports)
+                    {
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>@item.Name</span>
+                                <span>@item.Count (@item.Percentage%)</span>
+                            </div>
+
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-success"
+                                     role="progressbar"
+                                     style="width: @item.Percentage%">
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Summary -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="mb-4">Monthly Ticket Summary</h5>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th class="text-end">Total Tickets</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.MonthlyReports)
+                                {
+                                    <tr>
+                                        <td>@item.Month</td>
+                                        <td class="text-end">@item.TotalTickets</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

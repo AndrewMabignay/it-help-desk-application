@@ -1,0 +1,27 @@
+﻿@model int
+
+@{
+    ViewData["Title"] = "Ticket Deleted";
+}
+
+<div class="container-fluid">
+    <div class="card border-0 shadow-sm">
+        <div class="card-body text-center p-5">
+
+            <h2 class="text-success mb-3">
+                Ticket Deletion Confirmed!
+            </h2>
+
+            <p class="text-muted">
+                Ticket #@Model has passed the deletion confirmation.
+            </p>
+
+            <a asp-controller="TicketsMvc"
+               asp-action="Index"
+               class="btn btn-primary mt-3">
+                Back to Tickets
+            </a>
+
+        </div>
+    </div>
+</div>

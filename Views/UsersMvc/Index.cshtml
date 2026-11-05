@@ -1,0 +1,122 @@
+﻿@model List<ITHelpDeskApplication.ViewModels.UserViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">User Management</h2>
+            <p class="text-muted">
+                Manage system users, roles, and departments.
+            </p>
+        </div>
+
+        <button class="btn btn-primary" disabled>
+            + Add User
+        </button>
+    </div>
+
+    <!-- User Statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Users</h6>
+                    <h3 class="fw-bold">@Model.Count</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">Active Users</h6>
+                    <h3 class="fw-bold text-success">
+                        @Model.Count(u => u.Status == "Active")
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">Inactive Users</h6>
+                    <h3 class="fw-bold text-danger">
+                        @Model.Count(u => u.Status == "Inactive")
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Users Table -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3">All Users</h5>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.Id</td>
+
+                                <td class="fw-semibold">
+                                    @user.FullName
+                                </td>
+
+                                <td>@user.Email</td>
+
+                                <td>
+                                    <span class="badge bg-primary">
+                                        @user.Role
+                                    </span>
+                                </td>
+
+                                <td>@user.Department</td>
+
+                                <td>
+                                    @if (user.Status == "Active")
+                                    {
+                                        <span class="badge bg-success">
+                                            Active
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">
+                                            Inactive
+                                        </span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,52 @@
+﻿@model ITHelpDeskApplication.ViewModels.UploadTicketAttachmentViewModel
+
+@{
+    ViewData["Title"] = "Attachment Uploaded";
+}
+
+<div class="container-fluid">
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body text-center p-5">
+
+            <h2 class="text-success mb-3">
+                File Uploaded Successfully!
+            </h2>
+
+            <p class="text-muted">
+                Your attachment has been saved.
+            </p>
+
+            <hr />
+
+            <div class="text-start mx-auto"
+                 style="max-width: 600px;">
+
+                <p>
+                    <strong>Ticket ID:</strong>
+                    #@Model.TicketId
+                </p>
+
+                <p>
+                    <strong>Original File Name:</strong>
+                    @ViewBag.FileName
+                </p>
+
+                <p>
+                    <strong>Saved File Name:</strong>
+                    @ViewBag.SavedFileName
+                </p>
+
+            </div>
+
+            <a asp-controller="TicketsMvc"
+               asp-action="Attachments"
+               asp-route-id="@Model.TicketId"
+               class="btn btn-primary mt-3">
+                Back to Attachments
+            </a>
+
+        </div>
+    </div>
+
+</div>

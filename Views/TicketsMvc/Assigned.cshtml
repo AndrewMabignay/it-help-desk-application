@@ -1,0 +1,61 @@
+﻿@model ITHelpDeskApplication.ViewModels.TicketAssignmentViewModel
+
+@{
+    ViewData["Title"] = "Ticket Assigned";
+}
+
+<div class="container-fluid">
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body text-center p-5">
+
+            <h2 class="text-success mb-3">
+                Ticket Assigned Successfully!
+            </h2>
+
+            <p class="text-muted">
+                The ticket assignment has been processed.
+            </p>
+
+            <hr />
+
+            <div class="text-start mx-auto"
+                 style="max-width: 600px;">
+
+                <p>
+                    <strong>Ticket ID:</strong>
+                    #@Model.TicketId
+                </p>
+
+                <p>
+                    <strong>Subject:</strong>
+                    @Model.TicketSubject
+                </p>
+
+                <p>
+                    <strong>Assigned To:</strong>
+                    @Model.AssignedTo
+                </p>
+
+                <p>
+                    <strong>Assigned By:</strong>
+                    @Model.AssignedBy
+                </p>
+
+                <p>
+                    <strong>Assigned At:</strong>
+                    @Model.AssignedAt.ToString("MMM dd, yyyy hh:mm tt")
+                </p>
+
+            </div>
+
+            <a asp-controller="TicketsMvc"
+               asp-action="Index"
+               class="btn btn-primary mt-3">
+                Back to Tickets
+            </a>
+
+        </div>
+    </div>
+
+</div>

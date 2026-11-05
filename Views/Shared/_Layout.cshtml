@@ -1,0 +1,124 @@
+﻿ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IT Help Desk</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <style>
+            body {
+                background: #f8f9fa;
+            }
+
+            .sidebar {
+                width: 250px;
+                min-height: 100vh;
+                background: #212529;
+                position: fixed;
+                top: 0;
+                left: 0;
+                padding: 24px 16px;
+            }
+
+                .sidebar a {
+                    display: block;
+                    color: #adb5bd;
+                    text-decoration: none;
+                    padding: 12px 16px;
+                    border-radius: 6px;
+                    margin-bottom: 5px;
+                }
+
+                    .sidebar a:hover,
+                    .sidebar a.active {
+                        background: #343a40;
+                        color: white;
+                    }
+
+            .main-content {
+                margin-left: 250px;
+                padding: 30px;
+            }
+
+            .sidebar-title {
+                color: white;
+                margin-bottom: 30px;
+            }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <h5 class="sidebar-title">
+            IT Help Desk
+        </h5>
+
+        <nav>
+            <a asp-controller="Home"
+               asp-action="Index"
+               class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" ? "active" : "")">
+                Dashboard
+            </a>
+
+            <a asp-controller="TicketsMvc"
+               asp-action="Index"
+               class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "TicketsMvc" ? "active" : "")">
+                Tickets
+            </a>
+
+            <a asp-controller="UsersMvc"
+               asp-action="Index"
+               class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "UsersMvc" ? "active" : "")">
+                Users
+            </a>
+
+            <a asp-controller="DepartmentsMvc"
+               asp-action="Index"
+               class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "DepartmentsMvc" ? "active" : "")">
+                Departments
+            </a>
+
+            <a asp-controller="CategoriesMvc"
+               asp-action="Index"
+               class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "CategoriesMvc" ? "active" : "")">
+                Categories
+            </a>
+
+            <a asp-controller="PrioritiesMvc"
+               asp-action="Index"
+               class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "PrioritiesMvc" ? "active" : "")">
+                Priorities
+            </a>
+
+            <a asp-controller="ReportsMvc"
+               asp-action="Index"
+               class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "ReportsMvc" ? "active" : "")">
+                Reports
+            </a>
+
+            <a asp-controller="NotificationsMvc"
+               asp-action="Index"
+               class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "NotificationsMvc" ? "active" : "")">
+                Notifications
+            </a>
+        </nav>
+
+    </aside>
+
+    <main class="main-content">
+
+        @RenderBody()
+
+    </main>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

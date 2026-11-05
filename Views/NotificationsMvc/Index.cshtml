@@ -1,0 +1,112 @@
+﻿@model ITHelpDeskApplication.ViewModels.NotificationsPageViewModel
+
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+<div class="container-fluid">
+    <div class="mb-4">
+        <h2>Notifications</h2>
+        <p class="text-muted">Stay updated with your help desk activities.</p>
+    </div>
+
+    <!-- Summary -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <p class="text-muted mb-1">Total Notifications</p>
+                    <h3>@Model.TotalNotifications</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <p class="text-muted mb-1">Unread Notifications</p>
+                    <h3 class="text-danger">@Model.UnreadNotifications</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification List -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">Recent Notifications</h5>
+                <span class="badge bg-primary">
+                    @Model.UnreadNotifications Unread
+                </span>
+            </div>
+
+            @foreach (var notification in Model.Notifications)
+            {
+                <div class="d-flex justify-content-between align-items-start
+                    border-bottom py-3
+                    @(notification.IsRead ? "" : "bg-light")">
+
+                    <div class="d-flex gap-3">
+                        <div>
+                            @if (notification.Type == "Ticket")
+                            {
+                                <span class="badge bg-primary">Ticket</span>
+                            }
+                            else if (notification.Type == "Assignment")
+                            {
+                                <span class="badge bg-info">Assignment</span>
+                            }
+                            else if (notification.Type == "Status")
+                            {
+                                <span class="badge bg-success">Status</span>
+                            }
+                            else if (notification.Type == "Comment")
+                            {
+                                <span class="badge bg-warning text-dark">Comment</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">System</span>
+                            }
+                        </div>
+
+                        <div>
+                            <h6 class="mb-1">
+                                @notification.Title
+
+                                @if (!notification.IsRead)
+                                {
+                                    <span class="badge bg-danger">New</span>
+                                }
+                            </h6>
+
+                            <p class="text-muted mb-1">
+                                @notification.Message
+                            </p>
+
+                            <small class="text-muted">
+                                @notification.CreatedAt.ToString("MMM dd, yyyy hh:mm tt")
+                            </small>
+                        </div>
+                    </div>
+
+                    <div>
+                        @if (notification.IsRead)
+                        {
+                            <span class="text-success small">Read</span>
+                        }
+                        else
+                        {
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-primary"
+                                    disabled>
+                                Mark as Read
+                            </button>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@model ITHelpDeskApplication.ViewModels.CreateTicketCommentViewModel
+
+@{
+    ViewData["Title"] = "Comment Added";
+}
+
+<div class="container-fluid">
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body text-center p-5">
+
+            <h2 class="text-success mb-3">
+                Comment Submitted Successfully!
+            </h2>
+
+            <p class="text-muted">
+                Your comment has been received.
+            </p>
+
+            <hr />
+
+            <div class="text-start mx-auto"
+                 style="max-width: 600px;">
+
+                <p>
+                    <strong>Ticket ID:</strong> #@Model.TicketId
+                </p>
+
+                <p>
+                    <strong>Comment:</strong> @Model.Comment
+                </p>
+
+            </div>
+
+            <a asp-controller="TicketsMvc"
+               asp-action="Comments"
+               asp-route-id="@Model.TicketId"
+               class="btn btn-primary mt-3">
+                Back to Comments
+            </a>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,107 @@
+﻿@model List<ITHelpDeskApplication.ViewModels.TicketViewModel>
+
+@{
+    ViewData["Title"] = "Tickets";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Tickets Management</h2>
+            <p class="text-muted">Manage and monitor support tickets.</p>
+        </div>
+
+        <a asp-controller="TicketsMvc"
+           asp-action="Create"
+           class="btn btn-primary">
+            + Create Ticket
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Subject</th>
+                            <th>Requester</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Created At</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var ticket in Model)
+                        {
+                            <tr>
+                                <td>#@ticket.Id</td>
+                                <td>@ticket.Subject</td>
+                                <td>@ticket.Requester</td>
+                                <td>@ticket.Category</td>
+                                <td>@ticket.Priority</td>
+                                <td>@ticket.Status</td>
+                                <td>@ticket.CreatedAt.ToString("MMM dd, yyyy")</td>
+                                <td>
+                                    <a asp-controller="TicketsMvc"
+                                       asp-action="Details"
+                                       asp-route-id="@ticket.Id"
+                                       class="btn btn-sm btn-outline-primary">
+                                        View Details
+                                    </a>
+
+                                    <a asp-controller="TicketsMvc"
+                                       asp-action="Edit"
+                                       asp-route-id="@ticket.Id"
+                                       class="btn btn-sm btn-outline-warning">
+                                        Edit
+                                    </a>
+
+                                    <a asp-controller="TicketsMvc"
+                                       asp-action="Delete"
+                                       asp-route-id="@ticket.Id"
+                                       class="btn btn-sm btn-outline-danger">
+                                        Delete
+                                    </a>
+
+                                    <a asp-controller="TicketsMvc"
+                                       asp-action="Comments"
+                                       asp-route-id="@ticket.Id"
+                                       class="btn btn-sm btn-outline-info">
+                                        Comments
+                                    </a>
+
+                                    <a asp-controller="TicketsMvc"
+                                       asp-action="Attachments"
+                                       asp-route-id="@ticket.Id"
+                                       class="btn btn-sm btn-outline-secondary">
+                                        Attachments
+                                    </a>
+
+                                    <a asp-controller="TicketsMvc"
+                                       asp-action="Assign"
+                                       asp-route-id="@ticket.Id"
+                                       class="btn btn-sm btn-outline-primary">
+                                        Assign
+                                    </a>
+
+                                    <a asp-controller="TicketsMvc"
+                                       asp-action="UpdateStatus"
+                                       asp-route-id="@ticket.Id"
+                                       class="btn btn-sm btn-outline-success">
+                                        Update Status
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

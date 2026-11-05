@@ -1,0 +1,118 @@
+﻿@model List<ITHelpDeskApplication.ViewModels.PriorityViewModel>
+
+@{
+    ViewData["Title"] = "Priorities";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">Priority Management</h2>
+            <p class="text-muted">
+                Manage ticket urgency levels.
+            </p>
+        </div>
+
+        <button class="btn btn-primary" disabled>
+            + Add Priority
+        </button>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Priorities</h6>
+                    <h3 class="fw-bold">@Model.Count</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">Active Priorities</h6>
+                    <h3 class="fw-bold text-success">
+                        @Model.Count(p => p.Status == "Active")
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Priority Table -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3">All Priorities</h5>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+
+                    <thead>
+                        <tr>
+                            <th>Priority ID</th>
+                            <th>Priority Name</th>
+                            <th>Description</th>
+                            <th>Response Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var priority in Model)
+                        {
+                            <tr>
+                                <td>@priority.Id</td>
+
+                                <td class="fw-semibold">
+                                    @if (priority.Name == "Critical")
+                                    {
+                                        <span class="badge bg-danger">
+                                            Critical
+                                        </span>
+                                    }
+                                    else if (priority.Name == "High")
+                                    {
+                                        <span class="badge bg-warning text-dark">
+                                            High
+                                        </span>
+                                    }
+                                    else if (priority.Name == "Medium")
+                                    {
+                                        <span class="badge bg-info text-dark">
+                                            Medium
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">
+                                            Low
+                                        </span>
+                                    }
+                                </td>
+
+                                <td>@priority.Description</td>
+
+                                <td>@priority.ResponseTime</td>
+
+                                <td>
+                                    <span class="badge bg-success">
+                                        @priority.Status
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

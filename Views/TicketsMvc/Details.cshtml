@@ -1,0 +1,115 @@
+﻿@model ITHelpDeskApplication.ViewModels.TicketDetailsViewModel
+
+@{
+    ViewData["Title"] = "Ticket Details";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Ticket Details</h2>
+            <p class="text-muted mb-0">Ticket #@Model.Id</p>
+        </div>
+
+        <a asp-controller="TicketsMvc"
+           asp-action="Index"
+           class="btn btn-outline-secondary">
+            Back to Tickets
+        </a>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Main Ticket Information -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h4>@Model.Subject</h4>
+
+                        @if (Model.Status == "Open")
+                        {
+                            <span class="badge bg-danger">Open</span>
+                        }
+                        else if (Model.Status == "In Progress")
+                        {
+                            <span class="badge bg-warning text-dark">In Progress</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">Resolved</span>
+                        }
+                    </div>
+
+                    <hr />
+
+                    <h6>Description</h6>
+                    <p class="text-muted">@Model.Description</p>
+
+                    <hr />
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <small class="text-muted">Category</small>
+                            <p class="fw-semibold">@Model.Category</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <small class="text-muted">Priority</small>
+                            <p class="fw-semibold">@Model.Priority</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <small class="text-muted">Created At</small>
+                            <p class="fw-semibold">
+                                @Model.CreatedAt.ToString("MMM dd, yyyy hh:mm tt")
+                            </p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <small class="text-muted">Resolved At</small>
+                            <p class="fw-semibold">
+                                @(Model.ResolvedAt?.ToString("MMM dd, yyyy hh:mm tt") ?? "Not yet resolved")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Requester and Assignment -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="mb-3">Requester Information</h5>
+
+                    <small class="text-muted">Full Name</small>
+                    <p class="fw-semibold">@Model.Requester</p>
+
+                    <small class="text-muted">Email Address</small>
+                    <p class="fw-semibold">@Model.RequesterEmail</p>
+
+                    <small class="text-muted">Department</small>
+                    <p class="fw-semibold">@Model.Department</p>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="mb-3">Assignment</h5>
+
+                    <small class="text-muted">Assigned Technician</small>
+                    <p class="fw-semibold">@Model.AssignedTechnician</p>
+
+                    <small class="text-muted">Ticket Priority</small>
+                    <p class="fw-semibold">@Model.Priority</p>
+
+                    <small class="text-muted">Current Status</small>
+                    <p class="fw-semibold">@Model.Status</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

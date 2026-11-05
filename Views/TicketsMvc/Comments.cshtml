@@ -1,0 +1,80 @@
+﻿@model List<ITHelpDeskApplication.ViewModels.TicketCommentViewModel>
+
+@{
+    ViewData["Title"] = "Ticket Comments";
+}
+
+<div class="container-fluid">
+
+    <div class="mb-4">
+        <h2>Ticket Comments</h2>
+        <p class="text-muted">
+            Ticket #@ViewBag.TicketId - @ViewBag.Subject
+        </p>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">Conversation</h5>
+        </div>
+
+        <div class="card-body">
+
+            @foreach (var comment in Model)
+            {
+                <div class="border-bottom pb-3 mb-3">
+
+                    <div class="d-flex justify-content-between">
+                        <strong>@comment.Author</strong>
+
+                        <small class="text-muted">
+                            @comment.CreatedAt.ToString("MMM dd, yyyy hh:mm tt")
+                        </small>
+                    </div>
+
+                    <p class="mt-2 mb-0">
+                        @comment.Comment
+                    </p>
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+
+            <h5 class="mb-3">Add a Comment</h5>
+
+            <form asp-controller="TicketsMvc"
+                  asp-action="AddComment"
+                  method="post">
+
+                <input type="hidden"
+                       name="TicketId"
+                       value="@ViewBag.TicketId" />
+
+                <div class="mb-3">
+                    <textarea name="Comment"
+                              class="form-control"
+                              rows="4"
+                              placeholder="Write your comment..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Submit Comment
+                </button>
+
+                <a asp-controller="TicketsMvc"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    Back to Tickets
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>

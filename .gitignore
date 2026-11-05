@@ -1,0 +1,21 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build folders
+bin/
+obj/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+
+# Environment and secrets
+.env
+.env.*
+!.env.example

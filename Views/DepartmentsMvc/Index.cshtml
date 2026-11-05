@@ -1,0 +1,115 @@
+﻿@model List<ITHelpDeskApplication.ViewModels.DepartmentViewModel>
+
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">Department Management</h2>
+            <p class="text-muted">
+                Manage organizational departments.
+            </p>
+        </div>
+
+        <button class="btn btn-primary" disabled>
+            + Add Department
+        </button>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Departments</h6>
+                    <h3 class="fw-bold">@Model.Count</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">Active Departments</h6>
+                    <h3 class="fw-bold text-success">
+                        @Model.Count(d => d.Status == "Active")
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">Inactive Departments</h6>
+                    <h3 class="fw-bold text-danger">
+                        @Model.Count(d => d.Status == "Inactive")
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Department Table -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3">All Departments</h5>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+
+                    <thead>
+                        <tr>
+                            <th>Department ID</th>
+                            <th>Department Name</th>
+                            <th>Description</th>
+                            <th>Department Head</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var department in Model)
+                        {
+                            <tr>
+                                <td>@department.Id</td>
+
+                                <td class="fw-semibold">
+                                    @department.Name
+                                </td>
+
+                                <td>@department.Description</td>
+
+                                <td>@department.DepartmentHead</td>
+
+                                <td>
+                                    @if (department.Status == "Active")
+                                    {
+                                        <span class="badge bg-success">
+                                            Active
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">
+                                            Inactive
+                                        </span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

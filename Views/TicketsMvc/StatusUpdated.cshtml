@@ -1,0 +1,61 @@
+﻿@model ITHelpDeskApplication.ViewModels.UpdateTicketStatusViewModel
+
+@{
+    ViewData["Title"] = "Status Updated";
+}
+
+<div class="container-fluid">
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body text-center p-5">
+
+            <h2 class="text-success mb-3">
+                Ticket Status Updated Successfully!
+            </h2>
+
+            <p class="text-muted">
+                The ticket status has been updated.
+            </p>
+
+            <hr />
+
+            <div class="text-start mx-auto"
+                 style="max-width: 600px;">
+
+                <p>
+                    <strong>Ticket ID:</strong>
+                    #@Model.TicketId
+                </p>
+
+                <p>
+                    <strong>Subject:</strong>
+                    @Model.Subject
+                </p>
+
+                <p>
+                    <strong>New Status:</strong>
+                    @Model.Status
+                </p>
+
+                <p>
+                    <strong>Updated By:</strong>
+                    @Model.UpdatedBy
+                </p>
+
+                <p>
+                    <strong>Updated At:</strong>
+                    @Model.UpdatedAt.ToString("MMM dd, yyyy hh:mm tt")
+                </p>
+
+            </div>
+
+            <a asp-controller="TicketsMvc"
+               asp-action="Index"
+               class="btn btn-primary mt-3">
+                Back to Tickets
+            </a>
+
+        </div>
+    </div>
+
+</div>
